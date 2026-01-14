@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MGuzmanPinturasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Pintura">
+          <Key>
+            <PropertyRef Name="IdPintura" />
+          </Key>
+          <Property Name="IdPintura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Color" Type="varchar" MaxLength="20" />
+          <Property Name="FechaDeProduccion" Type="date" />
+          <Property Name="FechaDeCaducacion" Type="date" />
+        </EntityType>
+        <Function Name="PinturaAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Color" Type="varchar" Mode="In" />
+          <Parameter Name="FechaDeProduccion" Type="date" Mode="In" />
+          <Parameter Name="FechaDeCaducacion" Type="date" Mode="In" />
+        </Function>
+        <Function Name="PinturaDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdPintura" Type="int" Mode="In" />
+        </Function>
+        <Function Name="PinturaGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="PinturaGetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdPintura" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="MGuzmanPinturasModelStoreContainer">
+          <EntitySet Name="Pintura" EntityType="Self.Pintura" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MGuzmanPinturasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Pintura">
+          <Key>
+            <PropertyRef Name="IdPintura" />
+          </Key>
+          <Property Name="IdPintura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Color" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaDeProduccion" Type="DateTime" Precision="0" />
+          <Property Name="FechaDeCaducacion" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityContainer Name="MGuzmanPinturasEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Pinturas" EntityType="Self.Pintura" />
+          <FunctionImport Name="PinturaAdd">
+            <Parameter Name="Color" Mode="In" Type="String" />
+            <Parameter Name="FechaDeProduccion" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaDeCaducacion" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="PinturaDelete">
+            <Parameter Name="IdPintura" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="PinturaGetAll" ReturnType="Collection(MGuzmanPinturasModel.PinturaGetAll_Result)" />
+          <FunctionImport Name="PinturaGetById" ReturnType="Collection(MGuzmanPinturasModel.PinturaGetById_Result)">
+            <Parameter Name="IdPintura" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="PinturaGetAll_Result">
+          <Property Type="Int32" Name="IdPintura" Nullable="false" />
+          <Property Type="String" Name="Color" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="FechaDeProduccion" Nullable="true" />
+          <Property Type="DateTime" Name="FechaDeCaducacion" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="PinturaGetById_Result">
+          <Property Type="Int32" Name="IdPintura" Nullable="false" />
+          <Property Type="String" Name="Color" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="FechaDeProduccion" Nullable="true" />
+          <Property Type="DateTime" Name="FechaDeCaducacion" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MGuzmanPinturasModelStoreContainer" CdmEntityContainer="MGuzmanPinturasEntities">
+          <EntitySetMapping Name="Pinturas">
+            <EntityTypeMapping TypeName="MGuzmanPinturasModel.Pintura">
+              <MappingFragment StoreEntitySet="Pintura">
+                <ScalarProperty Name="IdPintura" ColumnName="IdPintura" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="FechaDeProduccion" ColumnName="FechaDeProduccion" />
+                <ScalarProperty Name="FechaDeCaducacion" ColumnName="FechaDeCaducacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="PinturaAdd" FunctionName="MGuzmanPinturasModel.Store.PinturaAdd" />
+          <FunctionImportMapping FunctionImportName="PinturaDelete" FunctionName="MGuzmanPinturasModel.Store.PinturaDelete" />
+          <FunctionImportMapping FunctionImportName="PinturaGetAll" FunctionName="MGuzmanPinturasModel.Store.PinturaGetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MGuzmanPinturasModel.PinturaGetAll_Result">
+                <ScalarProperty Name="IdPintura" ColumnName="IdPintura" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="FechaDeProduccion" ColumnName="FechaDeProduccion" />
+                <ScalarProperty Name="FechaDeCaducacion" ColumnName="FechaDeCaducacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PinturaGetById" FunctionName="MGuzmanPinturasModel.Store.PinturaGetById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MGuzmanPinturasModel.PinturaGetById_Result">
+                <ScalarProperty Name="IdPintura" ColumnName="IdPintura" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="FechaDeProduccion" ColumnName="FechaDeProduccion" />
+                <ScalarProperty Name="FechaDeCaducacion" ColumnName="FechaDeCaducacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
